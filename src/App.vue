@@ -26,10 +26,11 @@
       QR Scan
     </h1>
 
-    <qrcode-stream 
-        @decode='onDecode'>
+    <qrcode-stream @decode='onDecode' @init="onInit">
     </qrcode-stream>
-
+    <div style='display: flex; align-items: center; justify-content: center'>
+      <qrcode-capture v-if="shouldDisplayCaputure" @decode="onDecode" />
+    </div>
     <v-footer app>
       <span style="margin-left: 0.5em">Zippie Limited &copy; 2016</span>
       <v-spacer></v-spacer>
@@ -44,9 +45,8 @@ export default {
 
   data () {
     return {
-      notifyShown: false,
-      notifyTimeout: 5000,
-      notifyText: '',
+      shouldDisplayCaputure: false,
+
       version: require('../version.js')
     }
   },
@@ -55,6 +55,15 @@ export default {
     onDecode (data) {
       if (data.startsWith('http://') || data.startsWith('https://')) {
         window.location = data
+      }
+    },
+    async onInit (promise) {
+      try {
+        await promise
+      } catch (err) {
+        if (err.name === 'StreamApiNotSupportedError' | err.name === 'NotAllowedError' | err.name === 'NotFoundError') {
+          this.shouldDisplayCaputure = true
+        }
       }
     }
   }
