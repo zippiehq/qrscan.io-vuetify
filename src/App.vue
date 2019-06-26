@@ -26,9 +26,9 @@
       QR Scan
     </h1>
 
-    <qrcode-reader :video-constraints='{ facingMode: "environment" }' 
+    <qrcode-stream 
         @decode='onDecode'>
-    </qrcode-reader>
+    </qrcode-stream>
 
     <v-footer app>
       <span style="margin-left: 0.5em">Zippie Limited &copy; 2016</span>
@@ -61,19 +61,3 @@ export default {
 }
 </script>
 
-<style>
-.qrcode-reader {
-  margin: 0 auto;
-  width: 90%;
-  width: calc(100% - 4em);
-  max-height: 70%;
-  max-height: calc(100% - 30em);
-  border: 1px solid #8f8f8f;
-  border-radius: 1vh;
-  background-color: #dfdfdf;
-  overflow: hidden;
-}
-
-.qrcode-reader video {
-}
-</style>
