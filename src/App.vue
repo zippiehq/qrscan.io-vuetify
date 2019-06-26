@@ -28,8 +28,8 @@
 
     <qrcode-stream @decode='onDecode' @init="onInit">
     </qrcode-stream>
-    <div style='display: flex; align-items: center; justify-content: center'>
-      <qrcode-capture v-if="shouldDisplayCaputure" @decode="onDecode" />
+    <div v-if="shouldDisplayCaputure" style='display: flex; align-items: center; justify-content: center'>
+      <qrcode-capture  @decode="onDecode" />
     </div>
     <v-footer app>
       <span style="margin-left: 0.5em">Zippie Limited &copy; 2016</span>
